@@ -1,7 +1,7 @@
 import numpy as np
 
 seeds = []
-with open('input5.txt', 'r') as file:
+with open('~/aoc_inputs/input5.txt', 'r') as file:
     lines = file.readlines()
 
 seeds = [int(s) for s in lines[0].split() if s.isdigit()]

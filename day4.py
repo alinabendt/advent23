@@ -2,7 +2,7 @@ import numpy as np
 
 match_dict = {}
 points = 0
-with open('input4.txt', 'r') as file:
+with open('~/aoc_inputs/input4.txt', 'r') as file:
     for line in file:
         line = line.strip()
         card = "".join([s for s in line.split(':')[0] if s.isdigit()])

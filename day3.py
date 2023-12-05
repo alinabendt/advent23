@@ -1,10 +1,9 @@
 import numpy as np
-import re
 
 grid = []
 coord_s = []
 coord_n = []
-with open('input3.txt', 'r') as file:
+with open('~/aoc_inputs/input3.txt', 'r') as file:
     count = 0
     for line in file:
         line = line.strip()

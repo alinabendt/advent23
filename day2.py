@@ -1,11 +1,10 @@
 import numpy as np
-import re
 
 # 12 red, 13, green, 14 blue
 # ; marks between rounds
 # : marks game
 games_list = []
-with open('input2.txt', 'r') as file:
+with open('~/aoc_inputs/input2.txt', 'r') as file:
     for line in file:
         line = line.strip()
         # find first number: game number

@@ -3,7 +3,7 @@ import numpy as np
 # part 1
 numbers = []
 
-with open('input1.txt', 'r') as file:
+with open('~/aoc_inputs/input1.txt', 'r') as file:
     for line in file:
         line = line.strip()
         number = [s for s in line if s.isdigit()]
