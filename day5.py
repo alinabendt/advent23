@@ -24,3 +24,10 @@ for line in lines[1:]:
                     changed.append(i)
 low_loc = min(seed_map)
 print('part1:', low_loc)
+
+# part 2: each pair of numbers gives range of seeds
+seeds = [int(s) for s in lines[0].split() if s.isdigit()]
+starts = [seeds[s] for s in np.arange(len(seeds), step=2)]
+ends = [seeds[s] for s in np.arange(1, len(seeds), step=2)]
+seed_map = seeds.copy()
+
