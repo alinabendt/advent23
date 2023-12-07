@@ -103,36 +103,38 @@ def determine_type_joker(h, h_dict):
         else:
             count = Counter(ha)
             count = dict(count)
-            if any(item==4 for k, item in count.items()):
-                h_dict['five'].append(list(h))
-            elif any(item==3 for k, item in count.items()):
-                if 3+js == 5:  # max 2 jokers
+            if js==1:
+                if any(item==4 for k, item in count.items()):  # e.g. AAAAJ
                     h_dict['five'].append(list(h))
-                else:  # no full house since 3 card the same and at least one joker
+                elif any(item==3 for k, item in count.items()):
                     h_dict['four'].append(list(h))
-            elif any(item==2 for k, item in count.items()):
-                # test whether full house or three of a kind:
-                if js==3:
-                    # five, since better than full house
-                    h_dict['five'].append(list(h))
-                elif js==2:
-                    # fours, since better than two pairs
-                    h_dict['four'].append(list(h))
-                else:
-                    # count pairs: if two then full house
+                elif any(item==2 for k, item in count.items()):
                     pairs = 0
                     for key, item in count.items():
                         if item == 2:
                             pairs += 1
                     if pairs == 2:
-                        # two pair + one joker
+                        # two pair + one joker, e.g. AAKKJ
                         h_dict['full'].append(list(h))
                     else:
-                        # one pair + one joker
+                        # one pair + one joker, e.g. AAJKQ
                         h_dict['three'].append(list(h))
-            else:
-                # all different + joker: one pair
-                h_dict['one_p'].append(list(h))
+                else:
+                    h_dict['one_p'].append(list(h))
+            elif js==2:
+                if any(item==3 for k, item in count.items()):
+                    h_dict['five'].append(list(h))
+                elif any(item==2 for k, item in count.items()):
+                    h_dict['four'].append(list(h))
+                else:
+                    h_dict['three'].append(list(h))
+            elif js==3:
+                if any(item==2 for k, item in count.items()):
+                    h_dict['five'].append(list(h))
+                else:
+                    h_dict['four'].append(list(h))
+            elif js==4:
+                h_dict['five'].append(list(h))
     else:
         # normal different types:
         h_dict = determine_type(h, h_dict)
