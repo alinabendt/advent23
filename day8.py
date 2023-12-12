@@ -1,4 +1,5 @@
 import parse
+import numpy as np
 
 with open('/home/alina/aoc_inputs/input8.txt', 'r') as file:
 # with open('/home/space/phrpzz/aoc_inputs/input8.txt', 'r') as file:
@@ -53,27 +54,24 @@ all_a = {}
 for node in nodes.keys():
     if node.endswith('A'):
         all_a[node] = nodes[node]
-current = all_a
-steps2 = 0
-x = 0
-ends = [True]
-while any(ends):
-    n_current = {}
-    ends = []
-    steps2 += 1
-    if x>=len(instruct):
-        x = 0
-    for node in current.keys():
+steps2 = []
+# find common minimum number of steps from each branch
+for i, a in enumerate(list(all_a.keys())):
+    current = nodes[a]
+    x = 0
+    steps = 0
+    while len(steps2)<i+1:
+        steps += 1
+        if x>=len(instruct):
+            x = 0
         if instruct[x]=='R':
-            nn = current[node]['right']
-            n_current[nn] = nodes[nn]
+            current = nodes[current['right']]
         else:
-            nn = current[node]['left']
-            n_current[nn] = nodes[nn]
-        if nn.endswith('Z'):
-            ends.append(False)
-        else:
-            ends.append(True)
-    current = n_current
-    x += 1
-print('part2:', steps2)
+            current = nodes[current['left']]
+        if current['node'].endswith('Z'):
+            steps2.append(steps)
+        x += 1
+# find step number at which all reach
+# every node comes to an end node every multiple of the first hit
+lcm = np.lcm.reduce(steps2)
+print('part2:', lcm)
