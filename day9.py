@@ -13,6 +13,7 @@ def extract_number(line):
     return ns
 
 predict = []
+history = []  # for part 2
 for l in lines:
     l = l.strip()
     l_hist = extract_number(l)
@@ -32,6 +33,12 @@ for l in lines:
         # add value of diff to last value
         pred = l_pred[p][-1]+l_pred[j][-1]
         l_pred[p] = np.append(l_pred[p], pred)
+        # for part 2:
+        # also do for first value substracting
+        hist = l_pred[p][0]-l_pred[j][0]
+        l_pred[p] = np.insert(l_pred[p], 0, hist)
         j -= 1
     predict.append(pred)
+    history.append(hist)
 print('part1:', np.sum(predict))
+print('part2:', np.sum(history))
